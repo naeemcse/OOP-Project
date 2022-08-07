@@ -1,0 +1,288 @@
+//ALHAMDULILLAH
+//Devoloped by Najmul Islam Naeem
+#include<bits/stdc++.h>
+#include<Windows.h>
+#include<conio.h>
+using namespace std;
+class Bank
+{
+private :
+    int total;
+    string id;
+    struct person
+    {
+        string name, ID,address;
+        int contact, cash;
+    } person[100];
+public:
+    Bank()
+    {
+        total =0;
+    }
+    void choice();
+    void perData();
+    void show();
+    void update();
+    void search();
+    void trs();
+    void del();
+};
+int main()
+{
+    Bank b;
+    b.choice();
+
+    getch();
+    return 0;
+}
+void Bank:: choice()
+{
+    char ch;
+    while(1)
+    {
+
+        cout<<"\n\nPRESS....!!"<<endl;
+        cout<<"1. Create new Account"<<endl;
+        cout<<"2. View Costomer List"<<endl;
+        cout<<"3. Update information of existing accoutnt"<<endl;
+        cout<<"4. Check the details of an existiong account"<<endl;
+        cout<<"5. For Transaction"<<endl;
+        cout<<"6. Remove existing an account "<<endl;
+        cout<<"7. Exit"<<endl;
+        ch = getch();
+        switch(ch)
+        {
+        case '1':
+            Bank::perData();
+            break;
+        case '2':
+            if(total==0)
+            {
+
+                cout<<"No data is entered"<<endl;
+
+            }
+            else
+            {
+                Bank::show();
+            }
+            break;
+        case '3':
+            if(total==0)
+            {
+
+                cout<<"No data is entered"<<endl;
+
+            }
+            else
+            {
+                Bank::update();
+            }
+            break;
+        case '4':
+            if(total==0)
+            {
+
+                cout<<"No data is entered"<<endl;
+
+            }
+            else
+            {
+                Bank::search();
+            }
+            break;
+        case '5':
+            if(total==0)
+            {
+
+                cout<<"No data is entered"<<endl;
+
+            }
+            else
+            {
+                Bank::trs();
+            }
+            break;
+        case '6':
+            if(total==0)
+            {
+
+                cout<<"No data is entered"<<endl;
+
+            }
+            else
+            {
+                Bank::del();
+            }
+            break;
+        case '7':
+            exit(0);//it means return 0;
+            break ;
+
+        }
+    }
+}
+void Bank::perData()
+{
+    cout<<"Enter data of person "<<total+1<<endl;
+    cout<<"Enter name: ";
+    cin>>person[total].name;
+    cout<<"ID: ";
+    cin>>person[total].ID;
+    cout<<"Enter Address: ";
+    cin>>person[total].address;
+    cout<<"Total Cash: ";
+    cin>>person[total].cash;
+
+    total++;
+}
+void Bank::show()
+{
+    for(int i=0; i<total; i++)
+    {
+        cout<<"Data of person"<<i+i<<endl;
+        cout<<"Name : "<<person[i].name<<endl;
+        cout<<"ID :"<<person[i].ID;
+        cout<<"Address : "<<person[i].address<<endl;
+        cout<<"Cash : "<<person[i].cash<<endl;
+    }
+}
+void Bank::update()
+{
+    cout<<"Enter id of sutudent those data you want to update: ";
+    cin>>id;
+    for(int i=0; i<total; i++)
+    {
+        if(id==person[i].ID)
+        {
+            cout<<"previous data"<<endl;
+            cout<<"Data of person"<<i+i<<endl;
+            cout<<"Name : "<<person[i].name<<endl;
+            cout<<"ID :"<<person[i].ID;
+            cout<<"Address : "<<person[i].address<<endl;
+            cout<<"Cash : "<<person[i].cash<<endl;
+            cout<<"\nEnter new data : "<<endl;
+            cout<<"Enter data of person "<<total+1<<endl;
+            cout<<"Enter name: ";
+            cin>>person[i].name;
+            cout<<"ID: ";
+            cin>>person[i].ID;
+            cout<<"Enter Address: ";
+            cin>>person[i].address;
+            cout<<"Total Cash: ";
+            cin>>person[i].cash;
+            break;
+        }
+        if(i==total-1)
+            cout<<"No such record found"<<endl;
+    }
+}
+void Bank::search()
+{
+    cout<<"Enter id of student those data you want to seach: ";
+    cin>>id;
+    for(int i=0; i<total; i++)
+    {
+        if(id==person[i].ID)
+        {
+            cout<<"Name : "<<person[i].name<<endl;
+            cout<<"ID :"<<person[i].ID;
+            cout<<"Address : "<<person[i].address<<endl;
+            cout<<"Cash : "<<person[i].cash<<endl;
+            break;
+        }
+        if(i==total-1)
+            cout<<"No such record found"<<endl;
+    }
+}
+
+void Bank::trs()
+{
+    int cas;
+    cout<<"Enter id of student those data you want to transaction : ";
+    cin>>id;
+    for(int i=0; i<total; i++)
+    {
+        if(id==person[i].ID)
+        {
+            cout<<"Name : "<<person[i].name<<endl;
+            cout<<"ID :"<<person[i].ID;
+            cout<<"Address : "<<person[i].address<<endl;
+            cout<<"Previous Cash : "<<person[i].cash<<endl;
+            cout<<"Press 1 to deposit "<<endl;
+            cout<<"Press 2 to Withdraw "<<endl;
+            char ch=getch();
+            switch(ch)
+            {
+            case '1':
+                cout<<"How much cash you want to deposit ? "<<endl;
+                cin>>cas;
+                person[i].cash+=cas;
+                cout<<"your new cash is : "<<person[i].cash<<endl;
+                break;
+            case '2':
+back:
+                cout<<"How much cash you want to withdraw ? "<<endl;
+                cin>>cas;
+                if(cas>person[i].cash)
+                {
+                    cout<<"your account has only : "<<person[i].cash<<"you can not much money than you have"<<endl;
+                    Sleep(3000);
+                    goto back;
+                }
+                person[i].cash-=cas;
+                cout<<"your new cash is : "<<person[i].cash<<endl;
+                break;
+            default:
+                cout<<"Invalid Input"<<endl;
+                break;
+            }
+            break ;
+        }
+        if(i==total-1)
+            cout<<"No such record found"<<endl;
+    }
+
+
+}
+
+void Bank::del()
+{
+    cout<<"Press 1 to remove specific record "<<endl;
+    cout<<"Press 2 to remove full record "<<endl;
+    char ch=getch();
+    switch(ch)
+    {
+    case '1':
+        cout<<"Enter id of student those data you want to remove : ";
+        cin>>id;
+        for(int i=0; i<total; i++)
+        {
+            if(id==person[i].ID)
+            {
+                for(int j=1; j<total; j++)
+                {
+                    person[j].name=person[j+1].name;
+                    person[j].ID=person[j+1].ID;
+                    person[j].address=person[j+1].address;
+                    person[j].cash=person[j+1].cash;
+                }
+                cout<<"Your data is deleted\n";
+                total--;
+                break;
+            }
+            if(i==total-1)
+                cout<<"No such record found"<<endl;
+        }
+        break;
+    case '2':
+        total=0;
+        cout<<"All data deleted "<<endl;
+        break;
+    default:
+        cout<<"Invalid Input"<<endl;
+        break;
+
+
+    }
+}
